@@ -1,6 +1,6 @@
 {
   "name": "mac-windows",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Provide information about Application Windows running and activate and Application.",
   "main": "index.js",
   "scripts": {
