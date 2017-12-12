@@ -75,7 +75,7 @@ Extra options that can be passed in to `getWindows`:
 
 _NOTE:_ Swift and the AppKit Package don't support activating a specific window at the moment. When activating an Application the main window will be brought to the front. That is the last window that was used.
 
-### `getWindows(windowName: String)`
+### `activateWindow(windowName: String)`
 
 Activate the Application whose `ownerName` matches the given `windowName`.
 
@@ -84,7 +84,7 @@ Activating an Application will cause the Application's main window to come to th
 ```js
 import { activateWindow } from 'mac-windows';
 
-activateWindow('Google Chrome');
+activateWindow('Finder');
 ```
 
 ## Contributing

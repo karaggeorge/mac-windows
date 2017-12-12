@@ -18,7 +18,8 @@
     "Windows",
     "Applications",
     "Dimensions",
-    "Position"
+    "Position",
+    "Activate"
   ],
   "author": "George Karagkiaouris",
   "homepage": "https://github.com/karaggeorge/mac-windows",
