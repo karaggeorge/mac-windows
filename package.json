@@ -1,7 +1,7 @@
 {
   "name": "mac-windows",
   "version": "0.2.0",
-  "description": "Provide Information about Application Windows running",
+  "description": "Provide information about Application Windows running and activate and Application.",
   "main": "index.js",
   "scripts": {
     "build-activate-window": "swift build -C swift/ActiveWindow",
