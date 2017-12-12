@@ -1,0 +1,7 @@
+.DS_Store
+.build/debug/ModuleCache
+.build/debug/MacWindows.*
+Sources
+*swift
+build.db
+debug.yaml
