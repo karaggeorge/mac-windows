@@ -1,16 +1,19 @@
 import AppKit
 import Foundation
 
-func focus(windowName: String) {
+func focus(windowName: String) -> Bool {
   let workspace = NSWorkspace.shared()
   let activeApps = workspace.runningApplications
   for app in activeApps {
     if app.localizedName == windowName {
       app.activate(options: .activateIgnoringOtherApps)
-      break
+      return true
     }
   }
+  
+  return false
 }
 
 let windowName = String(CommandLine.arguments[1])!
-focus(windowName: windowName)
+let result = focus(windowName: windowName)
+print(result)

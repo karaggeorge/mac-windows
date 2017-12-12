@@ -43,7 +43,10 @@ exports.getWindows = function(opts = {}) {
     .then(windows => {
       if (opts.showAllWindows) return windows;
       
-      return windows.filter((win, index) => windows.findIndex(w => w.ownerName === win.ownerName) === index);
+      return windows.filter((win, index) => {
+        const firstWithName = windows.findIndex(w => !!w.name && w.ownerName === win.ownerName);
+        return firstWithName !== -1 ? firstWithName === index : windows.findIndex(w => w.ownerName === win.ownerName) === index
+      });
     });
 }
 
