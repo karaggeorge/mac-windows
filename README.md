@@ -72,6 +72,7 @@ Extra options that can be passed in to `getWindows`:
 |---|---|---|---|
 | includeToolbarWindows | Return toolbar applications and icons in the list of  windows as well (i.e. Battery Icon) | `bool` | `false` | 
 | showAllWindows | Return all the windows for each Application instead of just the main one | `bool` | `false` |
+| onScreenOnly | Return the windows from all the Applications even if they are not in the current screen | `bool` | `true` |
 
 _NOTE:_ Swift and the AppKit Package don't support activating a specific window at the moment. When activating an Application the main window will be brought to the front. That is the last window that was used.
 

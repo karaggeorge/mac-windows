@@ -1,11 +1,11 @@
 const child_process = require("child_process")
 const path = require("path")
 
-function getWindows() {
+function getWindows(onScreenOnly = true) {
   const dir = __dirname;
   const app = path.join(dir, 'swift/MacWindows/.build/debug/MacWindows');
   return new Promise(resolve => {
-    child_process.execFile(app, null, (err, stdout, stderr) => {
+    child_process.execFile(app, [ onScreenOnly ], (err, stdout, stderr) => {
       if (!err) {
         resolve(stdout);
       } else {
@@ -24,12 +24,12 @@ function activateWindow(windowName) {
 
 
 exports.getWindows = function(opts = {}) {
-  return getWindows()
+  return getWindows(opts.onScreenOnly)
     .then(data => JSON.parse(data))
     .then(windows => {
       if (opts.includeToolbarWindows) return windows;
       
-      return windows.filter(win => win.y !== 0);
+      return windows.filter(win => win.y > 0);
     })
     .then(windows => {
       if (opts.showAllWindows) return windows;

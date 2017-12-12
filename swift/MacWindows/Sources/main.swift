@@ -14,12 +14,20 @@ struct Window {
   }
 }
 
-func getWindows() -> [Window] {
+func getWindows(onScreenOnly: Bool) -> [Window] {
   var windows: [Window] = []
-  let options = CGWindowListOption(arrayLiteral: CGWindowListOption.excludeDesktopElements, CGWindowListOption.optionOnScreenOnly)
+  
+  var options = CGWindowListOption(arrayLiteral: CGWindowListOption.excludeDesktopElements)
+  if onScreenOnly {
+    options = CGWindowListOption(arrayLiteral: CGWindowListOption.excludeDesktopElements, CGWindowListOption.optionOnScreenOnly)
+  }
+  
   let windowList = CGWindowListCopyWindowInfo(options, kCGNullWindowID) as! NSArray
+  
   for window in windowList {
     let dict = (window as! NSDictionary)
+    
+    let pid = dict.value(forKey: "kCGWindowOwnerPID") as! Int
     let bounds = dict.value(forKey: "kCGWindowBounds") as! NSDictionary
     
     let x = bounds.value(forKey: "X")! as! Int
@@ -27,9 +35,15 @@ func getWindows() -> [Window] {
     let width = bounds.value(forKey: "Width")! as! Int
     let height = bounds.value(forKey: "Height")! as! Int
     
-    let pid = dict.value(forKey: "kCGWindowOwnerPID")! as! Int
-    let ownerName = dict.value(forKey: "kCGWindowOwnerName")! as! String
-    let name = dict.value(forKey: "kCGWindowName")! as! String
+    var ownerName = ""
+    if (dict.value(forKey: "kCGWindowOwnerName") != nil) {
+      ownerName = dict.value(forKey: "kCGWindowOwnerName") as! String
+    }
+    
+    var name = ""
+    if (dict.value(forKey: "kCGWindowName") != nil) {
+      name = dict.value(forKey: "kCGWindowName") as! String
+    }
     
     windows.append(Window(pid: pid, ownerName: ownerName, name: name, x: x, y: y, width: width, height: height))
   }
@@ -44,11 +58,12 @@ func toJson(windows: [Window]) -> String {
     let json = String(data: jsonData, encoding: String.Encoding.utf8)
     return json!
   } catch {
-    return "{}"
+    return "[]"
   }
 }
 
-let windows = getWindows();
+let onScreenOnly = Bool(CommandLine.arguments[1])!
+let windows = getWindows(onScreenOnly: onScreenOnly);
 let json = toJson(windows: windows);
 
 print(json);
