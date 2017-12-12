@@ -19,7 +19,16 @@ function getWindows(onScreenOnly = true) {
 function activateWindow(windowName) {
   const dir = __dirname;
   const app = path.join(dir, 'swift/ActivateWindow/.build/debug/ActivateWindow');
-  child_process.execFile(app, [ windowName ]);
+  return new Promise(resolve => {
+    child_process.execFile(app, [ windowName ], (err, stdout, stderr) => {
+      if (!err) {
+        resolve();
+      } else {
+        console.error(err);
+        resolve();
+      }
+    });
+  })
 }
 
 

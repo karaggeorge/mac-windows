@@ -5,4 +5,6 @@ getWindows().then(data => {
   console.log(data);
 });
 
-activateWindow('Finder');
+activateWindow('Finder').then(() => {
+  console.log('Activated');
+});
