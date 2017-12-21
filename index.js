@@ -35,19 +35,20 @@ function activateWindow(windowName) {
 exports.getWindows = function(opts = {}) {
   return getWindows(opts.onScreenOnly)
     .then(data => JSON.parse(data))
-    .then(windows => {
+    .then((windows = []) => {
       if (opts.includeToolbarWindows) return windows;
-      
+
       return windows.filter(win => win.y > 0);
     })
     .then(windows => {
       if (opts.showAllWindows) return windows;
-      
+
       return windows.filter((win, index) => {
         const firstWithName = windows.findIndex(w => !!w.name && w.ownerName === win.ownerName);
         return firstWithName !== -1 ? firstWithName === index : windows.findIndex(w => w.ownerName === win.ownerName) === index
       });
-    });
+    })
+    .catch(() => []);
 }
 
 exports.activateWindow = activateWindow;
