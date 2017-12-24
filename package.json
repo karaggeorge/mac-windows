@@ -4,8 +4,8 @@
   "description": "Provide information about Application Windows running and activate and Application.",
   "main": "index.js",
   "scripts": {
-    "build-activate-window": "swift build -C swift/ActivateWindow",
-    "build-mac-windows": "swift build -C swift/MacWindows",
+    "build-activate-window": "swift build -c release -Xswiftc -static-stdlib --package-path swift/ActivateWindow",
+    "build-mac-windows": "swift build -c release -Xswiftc -static-stdlib --package-path swift/MacWindows",
     "start": "node index.js",
     "build": "npm run build-activate-window && npm run build-mac-windows"
   },

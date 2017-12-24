@@ -1,6 +1,6 @@
 .DS_Store
-.build/debug/ModuleCache
-.build/debug/ActivateWindow.*
+.build/
+!.build/release/ActivateWindow
 Sources
 *swift
 build.db

@@ -1,6 +1,6 @@
 .DS_Store
-.build/debug/ModuleCache
-.build/debug/MacWindows.*
+.build/
+!.build/release/MacWindows
 Sources
 *swift
 build.db

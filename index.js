@@ -3,7 +3,7 @@ const path = require("path")
 
 function getWindows(onScreenOnly = true) {
   const dir = __dirname;
-  const app = path.join(dir, 'swift/MacWindows/.build/debug/MacWindows');
+  const app = path.join(dir, 'swift/MacWindows/.build/release/MacWindows');
   return new Promise(resolve => {
     child_process.execFile(app, [ onScreenOnly ], (err, stdout, stderr) => {
       if (!err) {
@@ -18,7 +18,7 @@ function getWindows(onScreenOnly = true) {
 
 function activateWindow(windowName) {
   const dir = __dirname;
-  const app = path.join(dir, 'swift/ActivateWindow/.build/debug/ActivateWindow');
+  const app = path.join(dir, 'swift/ActivateWindow/.build/release/ActivateWindow');
   return new Promise(resolve => {
     child_process.execFile(app, [ windowName ], (err, stdout, stderr) => {
       if (!err) {
