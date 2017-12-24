@@ -1,6 +1,4 @@
 .DS_Store
-.build/
-!.build/release/ActivateWindow
 Sources
 *swift
 build.db
