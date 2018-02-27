@@ -38,7 +38,9 @@ exports.getWindows = function(opts = {}) {
     .then((windows = []) => {
       if (opts.includeToolbarWindows) return windows;
 
-      return windows.filter(win => win.y > 0);
+      const menubarIndex = windows.findIndex(w => w.name === "Menubar");
+
+      return windows.slice(menubarIndex + 1);
     })
     .then(windows => {
       if (opts.showAllWindows) return windows;
