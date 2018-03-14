@@ -8,7 +8,7 @@ struct Window {
   var y = 0
   var width = 0
   var height = 0
-  
+
   func convertToDictionary() -> [String : Any] {
     return ["pid": self.pid, "ownerName": self.ownerName, "name": self.name, "x": self.x, "y": self.y, "width": self.width, "height": self.height]
   }
@@ -16,38 +16,49 @@ struct Window {
 
 func getWindows(onScreenOnly: Bool) -> [Window] {
   var windows: [Window] = []
-  
+
   var options = CGWindowListOption(arrayLiteral: CGWindowListOption.excludeDesktopElements)
   if onScreenOnly {
     options = CGWindowListOption(arrayLiteral: CGWindowListOption.excludeDesktopElements, CGWindowListOption.optionOnScreenOnly)
   }
-  
+
   let windowList = CGWindowListCopyWindowInfo(options, kCGNullWindowID) as! NSArray
-  
+
   for window in windowList {
     let dict = (window as! NSDictionary)
-    
-    let pid = dict.value(forKey: "kCGWindowOwnerPID") as! Int
+
+    let minWinSize: Int = 50
+
+    if ((dict.value(forKey: "kCGWindowAlpha") as! Double) == 0) {
+      continue;
+    }
+
     let bounds = dict.value(forKey: "kCGWindowBounds") as! NSDictionary
-    
+
     let x = bounds.value(forKey: "X")! as! Int
     let y = bounds.value(forKey: "Y")! as! Int
     let width = bounds.value(forKey: "Width")! as! Int
     let height = bounds.value(forKey: "Height")! as! Int
-    
+
+    if (width < minWinSize || height < minWinSize) {
+      continue;
+    }
+
+    let pid = dict.value(forKey: "kCGWindowOwnerPID") as! Int
+
     var ownerName = ""
     if (dict.value(forKey: "kCGWindowOwnerName") != nil) {
       ownerName = dict.value(forKey: "kCGWindowOwnerName") as! String
     }
-    
+
     var name = ""
     if (dict.value(forKey: "kCGWindowName") != nil) {
       name = dict.value(forKey: "kCGWindowName") as! String
     }
-    
+
     windows.append(Window(pid: pid, ownerName: ownerName, name: name, x: x, y: y, width: width, height: height))
   }
-  
+
   return windows
 }
 

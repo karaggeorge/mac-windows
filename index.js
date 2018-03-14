@@ -36,13 +36,6 @@ exports.getWindows = function(opts = {}) {
   return getWindows(opts.onScreenOnly)
     .then(data => JSON.parse(data))
     .then((windows = []) => {
-      if (opts.includeToolbarWindows) return windows;
-
-      const menubarIndex = windows.findIndex(w => w.name === "Menubar");
-
-      return windows.slice(menubarIndex + 1);
-    })
-    .then(windows => {
       if (opts.showAllWindows) return windows;
 
       return windows.filter((win, index) => {
