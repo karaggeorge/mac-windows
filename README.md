@@ -70,7 +70,6 @@ Extra options that can be passed in to `getWindows`:
 
 | Name | Description | Type | Default Value |
 |---|---|---|---|
-| includeToolbarWindows | Return toolbar applications and icons in the list of  windows as well (i.e. Battery Icon) | `bool` | `false` | 
 | showAllWindows | Return all the windows for each Application instead of just the main one | `bool` | `false` |
 | onScreenOnly | Return the windows from all the Applications even if they are not in the current screen | `bool` | `true` |
 
