@@ -1,5 +1,5 @@
-const getWindows = require('./').getWindows;
-const activateWindow = require('./').activateWindow;
+const getWindows = require('.').getWindows;
+const activateWindow = require('.').activateWindow;
 
 getWindows().then(data => {
   console.log(data);
