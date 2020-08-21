@@ -4,8 +4,8 @@
   "description": "Provide information about Application Windows running and activate and Application.",
   "main": "index.js",
   "scripts": {
-    "build-activate-window": "swift build -c release -Xswiftc -static-stdlib --package-path swift/ActivateWindow && cp swift/ActivateWindow/.build/release/ActivateWindow scripts/ActivateWindow",
-    "build-mac-windows": "swift build -c release -Xswiftc -static-stdlib --package-path swift/MacWindows  && cp swift/MacWindows/.build/release/MacWindows scripts/MacWindows",
+    "build-activate-window": "swift build -c release --package-path swift/ActivateWindow && cp swift/ActivateWindow/.build/release/activate-window scripts/ActivateWindow",
+    "build-mac-windows": "swift build -c release --package-path swift/MacWindows  && cp swift/MacWindows/.build/release/mac-windows scripts/MacWindows",
     "start": "node index.js",
     "build": "npm run build-activate-window && npm run build-mac-windows",
     "test": "xo"
@@ -14,6 +14,10 @@
     "darwin",
     "!win32",
     "!linux"
+  ],
+  "files": [
+    "index.js",
+    "scripts"
   ],
   "keywords": [
     "Mac",

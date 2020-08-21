@@ -1,9 +1,10 @@
-Mac Windows
-==
+# mac-windows
 
-Provide information about Application Windows running and activate and Application.
+> Provide information about Application Windows running and activate and Application.
 
 **Important:** This package does not work on Windows or Linux
+
+Requires macOS 10.12 or later. macOS 10.13 or earlier needs to download the [Swift runtime support libraries](https://support.apple.com/kb/DL1998).
 
 ## Instalation
 
@@ -17,7 +18,7 @@ After that you can import the various functions as follows:
 import { getWindows, activateWindow } from 'mac-windows';
 ```
 
-or 
+or
 
 ```js
 const getWindows = require('mac-windows').getWindows
@@ -35,6 +36,7 @@ Returns a Promise with an array containing an object for each Application curren
 - **height:** Current height of the main window
 - **x:** Horizontal position of the main window
 - **y:** Vertical position of the main window
+- **number:** The number of the window
 
 ```js
 import { getWindows } from 'mac-windows';
@@ -45,14 +47,15 @@ getWindows().then(windows => {
 
 /*
 [
-  { 
+  {
     pid: 320,
     ownerName: 'Finder',
     name: 'Desktop',
     width: 770,
     height: 436,
     x: 295,
-    y: 100 
+    y: 100,
+    number: 1027
   }, {
     pid: 11734,
     ownerName: 'Google Chrome',
@@ -60,7 +63,8 @@ getWindows().then(windows => {
     width: 1276,
     height: 778,
     x: 0,
-    y: 23
+    y: 23,
+    number: 63226
   }
 ]
 */
@@ -79,7 +83,7 @@ _NOTE:_ Swift and the AppKit Package don't support activating a specific window 
 
 Activate the Application whose `ownerName` matches the given `windowName`.
 
-Activating an Application will cause the Application's main window to come to the front of the screen. 
+Activating an Application will cause the Application's main window to come to the front of the screen.
 
 ```js
 import { activateWindow } from 'mac-windows';

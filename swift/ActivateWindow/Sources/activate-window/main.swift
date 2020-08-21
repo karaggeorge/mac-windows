@@ -2,7 +2,7 @@ import AppKit
 import Foundation
 
 func focus(windowName: String) -> Bool {
-  let workspace = NSWorkspace.shared()
+  let workspace = NSWorkspace.shared
   let activeApps = workspace.runningApplications
   for app in activeApps {
     if app.localizedName == windowName {
@@ -10,10 +10,10 @@ func focus(windowName: String) -> Bool {
       return true
     }
   }
-  
+
   return false
 }
 
-let windowName = String(CommandLine.arguments[1])!
+let windowName = String(CommandLine.arguments[1])
 let result = focus(windowName: windowName)
 print(result)

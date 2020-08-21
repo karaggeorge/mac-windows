@@ -8,9 +8,10 @@ struct Window {
   var y = 0
   var width = 0
   var height = 0
+  var number = 0
 
   func convertToDictionary() -> [String : Any] {
-    return ["pid": self.pid, "ownerName": self.ownerName, "name": self.name, "x": self.x, "y": self.y, "width": self.width, "height": self.height]
+    return ["pid": self.pid, "ownerName": self.ownerName, "name": self.name, "x": self.x, "y": self.y, "width": self.width, "height": self.height, "number": self.number]
   }
 }
 
@@ -51,12 +52,17 @@ func getWindows(onScreenOnly: Bool) -> [Window] {
       ownerName = dict.value(forKey: "kCGWindowOwnerName") as! String
     }
 
+    var number = 0
+    if (dict.value(forKey: "kCGWindowNumber") != nil) {
+      number = dict.value(forKey: "kCGWindowNumber") as! Int
+    }
+
     var name = ""
     if (dict.value(forKey: "kCGWindowName") != nil) {
       name = dict.value(forKey: "kCGWindowName") as! String
     }
 
-    windows.append(Window(pid: pid, ownerName: ownerName, name: name, x: x, y: y, width: width, height: height))
+    windows.append(Window(pid: pid, ownerName: ownerName, name: name, x: x, y: y, width: width, height: height, number: number))
   }
 
   return windows
