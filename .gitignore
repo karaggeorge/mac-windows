@@ -1,7 +1,8 @@
 
 # Created by https://www.gitignore.io/api/node,macos
 
-scripts
+scripts/MacWindows
+scripts/ActivateWindow
 
 ### macOS ###
 *.DS_Store
