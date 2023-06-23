@@ -38,7 +38,7 @@
     "url": "https://github.com/karaggeorge/mac-windows/issues"
   },
   "devDependencies": {
-    "xo": "^0.20.3"
+    "xo": "^0.54.2"
   },
   "xo": {
     "space": 2
